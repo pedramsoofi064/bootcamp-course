@@ -1,43 +1,28 @@
 <template>
   <div id="app">
+    <header-component />
     <h1 class="color-red" v-text="name"></h1>
-    <img v-bind:src="imageSrc" :alt="name" ref="myimg" />
-    <br />
-    <a :href="link" v-text="link" :style="style" ref="mylink"></a>
-    <span v-html="htmlStr"></span>
-    <!-- <hr />
-    <div v-if="number > 5">num > 5</div>
-    <div v-else-if="number == 5">num == 5</div>
-    <div v-else>num less than five</div>
-    <hr /> -->
-    <!-- <ul>
-      <li v-for="(item, index) in 5" :key="`item-${index}`">
-        {{ item }} {{ index }}
-      </li>
-    </ul>
-    <hr />
-   
-    <hr>
-    <input type="text" v-model="num2">
-    <div>{{num2 }}</div> -->
+    <MyButton class="test" bgColor="red" @clicked="num1++"></MyButton>
+    <MyButton :count="num2" bgColor="blue" @clicked="num2++" />
 
-    <!-- <form @submit.prevent ="func()">
-      test
-      <button type="submit">click me</button>
-    </form> -->
-    <!-- <hr />
-    {{ courseName }}
-    <hr />
-    <button @click="func()">click me</button>
-    <br />
-    <h2>{{ num }}</h2>
-    <br> -->
+    <div class="input-filed">
+      <label class="input-filed__label">name</label>
+      <input class="input-filed__inp" type="text" name="" id="" />
+    </div>
+
+    <div class="badge" :class="[number > 2 ? 'success' : 'error']">Bootcamp</div>
   </div>
 </template>
 
-<script >
+<script>
+import MyButton from "@/components/button-counter.vue";
+import HeaderComponent from "./components/header.vue";
 export default {
   name: "App",
+  components: {
+    MyButton,
+    HeaderComponent,
+  },
   data() {
     return {
       name: "Bootcamp",
@@ -46,63 +31,78 @@ export default {
       htmlStr: "<b>Hello</b>",
       number: 5,
       arr: [1, 2, 3],
-      num: 5,
-      num2: 5,
+      num1: 5,
+      num2: 10,
       style: { display: "block", textDecoration: "none", fontSize: "25px" },
+      chk: [],
+      bool: false,
     };
-  },
-  computed: {
-    courseName() {
-      // code
-      const name = "bootcamp front-end";
-
-      return name + " sdasdsad";
-    },
-  },
-  watch: {
-    num(newVal, oldVal) {
-      console.log(newVal, oldVal);
-      if (newVal > 10) {
-        console.log("hello its done");
-      }
-    },
-  },
-  // beforeCreate() {
-  //   console.log('beforeCreate');
-  // },
-  created() {
-    // console.log("created");
-    // const elm = document.getElementById("mylink");
-    // console.log(elm);
-  },
-  // beforeMount(){
-  //   console.log('beforeMount');
-  // },
-  // beforeUpdate() {
-  //   console.log("beforeUpdate");
-  // },
-  // updated() {
-  //   console.log('updated')
-  // },
-  mounted() {
-    console.log("mounted");
-    // const elm = document.getElementById("mylink");
-    const elm = this.$refs.mylink
-    console.log(elm);
-    // console.log(elm);
-  },
-
-  methods: {
-    func() {
-      this.num += 1;
-    },
-    func2() {},
   },
 };
 </script>
 
 <style lang="scss">
 .color-red {
-  color: blue;
+  color: goldenrod;
+}
+
+.input-filed {
+  display: flex;
+  flex-direction: column;
+  max-width: 200px;
+  padding: 10px;
+  border: 1px solid;
+  &__label {
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  &__inp {
+    height: 40px;
+    border-radius: 5px;
+  }
+}
+
+html,
+#app,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+#app {
+  margin-top: 80px;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.badge {
+  font-size: 20px;
+  margin-top: 20px;
+  width: 150px;
+  height: 40px;
+  padding: 10px;
+    border-radius: 7px;
+  border: 1px solid;
+
+}
+
+.error {
+  color: red;
+  border-color: red;
+}
+
+.success {
+  color: greenyellow;
+  border-color: greenyellow;
+
+}
+
+.active {
+  font-weight: 700;
 }
 </style>
