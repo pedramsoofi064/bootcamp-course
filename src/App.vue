@@ -1,108 +1,70 @@
 <template>
   <div id="app">
-    <header-component />
-    <h1 class="color-red" v-text="name"></h1>
-    <MyButton class="test" bgColor="red" @clicked="num1++"></MyButton>
-    <MyButton :count="num2" bgColor="blue" @clicked="num2++" />
-
-    <div class="input-filed">
-      <label class="input-filed__label">name</label>
-      <input class="input-filed__inp" type="text" name="" id="" />
-    </div>
-
-    <div class="badge" :class="[number > 2 ? 'success' : 'error']">Bootcamp</div>
+    <nav class="nav">
+      <router-link to="/home" class="nav-links" exact-active-class="active" exact
+        >Home</router-link
+      >
+      <router-link to="/welcome" class="nav-links" exact-active-class="active" exact
+        >Welcome</router-link
+      >
+      <router-link to="/users" class="nav-links" exact-active-class="active" exact
+        >Users</router-link
+      >
+    </nav>
+    <router-view />
   </div>
 </template>
 
 <script>
-import MyButton from "@/components/button-counter.vue";
-import HeaderComponent from "./components/header.vue";
 export default {
   name: "App",
-  components: {
-    MyButton,
-    HeaderComponent,
-  },
+  components: {},
   data() {
-    return {
-      name: "Bootcamp",
-      imageSrc: require("@/assets/logo.png"),
-      link: "http://google.com",
-      htmlStr: "<b>Hello</b>",
-      number: 5,
-      arr: [1, 2, 3],
-      num1: 5,
-      num2: 10,
-      style: { display: "block", textDecoration: "none", fontSize: "25px" },
-      chk: [],
-      bool: false,
-    };
+    return {};
   },
 };
 </script>
 
 <style lang="scss">
-.color-red {
-  color: goldenrod;
-}
-
-.input-filed {
-  display: flex;
-  flex-direction: column;
-  max-width: 200px;
-  padding: 10px;
-  border: 1px solid;
-  &__label {
-    font-size: 20px;
-    font-weight: 700;
-  }
-
-  &__inp {
-    height: 40px;
-    border-radius: 5px;
-  }
-}
-
 html,
 #app,
 body {
   width: 100%;
   height: 100%;
-}
-
-#app {
-  margin-top: 80px;
+  background-color: #d4f1f4;
+  color: #05445e;
 }
 
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.badge {
-  font-size: 20px;
-  margin-top: 20px;
-  width: 150px;
-  height: 40px;
-  padding: 10px;
-    border-radius: 7px;
-  border: 1px solid;
+.nav {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #d4f1f4;
+  padding: 0 10px;
+  background-color: #05445e;
+  .nav-links {
+    font-size: 18px;
+    font-weight: 700;
+    margin-right: 10px;
+    text-decoration: none;
+    color: #75e6da;
+    transition: all 0.5s;
+    &:hover {
+      border-bottom: 1px solid #189ab4;
+      color: #189ab4;
+    }
 
-}
-
-.error {
-  color: red;
-  border-color: red;
-}
-
-.success {
-  color: greenyellow;
-  border-color: greenyellow;
-
-}
-
-.active {
-  font-weight: 700;
+    &.active {
+      border-bottom: 1px solid #189ab4;
+      color: #189ab4;
+    }
+  }
 }
 </style>

@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: "button-counter",
+  name: "ButtonCounter",
   props: {
     count: {
       type: Number,
