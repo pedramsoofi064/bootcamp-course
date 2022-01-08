@@ -1,13 +1,25 @@
 <template>
   <div id="app">
     <nav class="nav">
-      <router-link to="/home" class="nav-links" exact-active-class="active" exact
+      <router-link
+        to="/home"
+        class="nav-links"
+        exact-active-class="active"
+        exact
         >Home</router-link
       >
-      <router-link to="/welcome" class="nav-links" exact-active-class="active" exact
+      <router-link
+        to="/welcome"
+        class="nav-links"
+        exact-active-class="active"
+        exact
         >Welcome</router-link
       >
-      <router-link to="/users" class="nav-links" exact-active-class="active" exact
+      <router-link
+        to="/users"
+        class="nav-links"
+        exact-active-class="active"
+        exact
         >Users</router-link
       >
     </nav>
@@ -66,5 +78,18 @@ body {
       color: #189ab4;
     }
   }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+
+.fade-enter-to,
+.fade-leave {
+  opacity: 1;
 }
 </style>

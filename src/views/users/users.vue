@@ -19,8 +19,12 @@
         - {{ user.name }}
       </router-link> -->
     </ul>
+   
     <hr />
-    <router-view />
+    <transition name="test">
+      <router-view />
+    </transition>
+    
   </div>
 </template>
 
@@ -42,12 +46,12 @@ export default {
     goToUserPage(user) {
       // code
 
-    //   this.$router.push(`/users/${user.id}?name=${user.name}`);
-    this.$router.push({
-        name: 'user',
-        params: {id: user.id},
-        query: {name: user.name}
-    })
+      //   this.$router.push(`/users/${user.id}?name=${user.name}`);
+      this.$router.push({
+        name: "user",
+        params: { id: user.id },
+        query: { name: user.name },
+      });
     },
   },
 };
@@ -65,5 +69,15 @@ export default {
   &:hover {
     color: #189ab4;
   }
+}
+.test-enter-active, .test-leave-active {
+  transition: opacity .5s;
+}
+.test-enter, .test-leave-to  {
+  opacity: 0;
+}
+
+.test-enter-to , .test-leave {
+  opacity: 1;
 }
 </style>

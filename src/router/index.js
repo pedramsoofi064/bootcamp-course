@@ -8,7 +8,12 @@ import UserView from '@/views/users/user.vue'
 
 Vue.use(VueRouter);
 
-const routes = [{
+const routes = [
+    {
+        path: '/',
+        redirect: 'welcome' 
+    },
+    {
         path: '/welcome',
         name: 'welcome',
         component: WelcomeView
@@ -22,12 +27,19 @@ const routes = [{
         path: '/users',
         name: 'users',
         component: UsersView,
-        children: [{
+        children: [
+            {
             path: ':id',
             name: 'user',
             component: UserView,
            
         }]
+    },
+    {
+        path: '*',
+        name: 'notfound',
+        component: ()=> import('@/views/404.vue'),
+        
     }
 ]
 
@@ -36,5 +48,13 @@ const router = new VueRouter({
     base: process.env.BASE_URL,
     routes
 })
+
+router.beforeEach((to , from , next )=>{
+
+    next()
+})
+
+
+
 
 export default router
