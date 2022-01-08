@@ -1,28 +1,6 @@
 <template>
   <div id="app">
-    <nav class="nav">
-      <router-link
-        to="/home"
-        class="nav-links"
-        exact-active-class="active"
-        exact
-        >Home</router-link
-      >
-      <router-link
-        to="/welcome"
-        class="nav-links"
-        exact-active-class="active"
-        exact
-        >Welcome</router-link
-      >
-      <router-link
-        to="/users"
-        class="nav-links"
-        exact-active-class="active"
-        exact
-        >Users</router-link
-      >
-    </nav>
+
     <router-view />
   </div>
 </template>
@@ -43,8 +21,7 @@ html,
 body {
   width: 100%;
   height: 100%;
-  background-color: #d4f1f4;
-  color: #05445e;
+
 }
 
 * {
@@ -54,31 +31,7 @@ body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.nav {
-  height: 50px;
-  display: flex;
-  align-items: center;
-  border-bottom: 1px solid #d4f1f4;
-  padding: 0 10px;
-  background-color: #05445e;
-  .nav-links {
-    font-size: 18px;
-    font-weight: 700;
-    margin-right: 10px;
-    text-decoration: none;
-    color: #75e6da;
-    transition: all 0.5s;
-    &:hover {
-      border-bottom: 1px solid #189ab4;
-      color: #189ab4;
-    }
 
-    &.active {
-      border-bottom: 1px solid #189ab4;
-      color: #189ab4;
-    }
-  }
-}
 
 .fade-enter-active,
 .fade-leave-active {
