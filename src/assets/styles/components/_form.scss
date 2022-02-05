@@ -1,0 +1,18 @@
+.form {
+    &__field {
+        @include flex($direction: column);
+        margin-bottom: 15px;
+
+        label {
+            color: var(--primary-darker);
+            font-weight: bold;
+        }
+
+        input {
+            height: 40px;
+            border: 1px solid var(--primary-main);
+            border-radius: 8px;
+            padding: 0 10px;
+        }
+    }
+}
