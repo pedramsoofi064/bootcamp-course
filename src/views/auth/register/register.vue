@@ -56,12 +56,6 @@ export default {
         this.$cookie.set("username", username);
         this.$notif.success("user registred successfully!");
         this.$router.push("/articles");
-      } catch (error) {
-        const { errors } = error.response?.data;
-        Object.keys(errors).forEach((key) => {
-          console.log();
-          this.$notif.error(`${key}: ${errors[key][0]} !!`);
-        });
       } finally {
         this.loading = false;
       }

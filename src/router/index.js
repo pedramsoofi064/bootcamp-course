@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import authRoutes from "@/views/auth/auth.routes";
+import authMiddleware from '@/middlewares/auth.middleware'
 
 Vue.use(VueRouter);
 
@@ -14,11 +15,17 @@ const routes = [
     name: "auth",
     component: () => import("@/views/auth/auth.vue"),
     children: authRoutes,
+    meta: {
+      isAuthRequired : false,
+    }
   },
   {
     path: "/articles",
     name: "articles",
     component: () => import("@/views/articles/articles.vue"),
+    meta: {
+      isAuthRequired : true,
+    }
   },
 ];
 
@@ -28,8 +35,6 @@ const router = new VueRouter({
   routes,
 });
 
-router.beforeEach((to, from, next) => {
-  next();
-});
+router.beforeEach(authMiddleware);
 
 export default router;
