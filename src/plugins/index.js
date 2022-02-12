@@ -1,2 +1,3 @@
 import './axios.plugin'
-import './toast.plugin'
+import './jsCookie.plugin'
+import './notification.plugin'

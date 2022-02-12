@@ -24,6 +24,9 @@
         ></my-button>
       </div>
     </form>
+    <router-link to="/auth/login" class="auth__navigate-link w-100"
+      >Already has account? <span>Login</span></router-link
+    >
   </section>
 </template>
 
@@ -46,15 +49,19 @@ export default {
       this.loading = true;
       try {
         const res = await userServices.register(this.user);
-        res;
+        const { user } = res.data;
+        // same => const user = res.data.user
+        const { token, username } = user;
+        this.$cookie.set("token", token);
+        this.$cookie.set("username", username);
+        this.$notif.success("user registred successfully!");
         this.$router.push("/articles");
-      } catch {
-        console.log("error in register");
-        // this.$toast.open({
-        //   message: "Something went wrong!",
-        //   type: "error",
-        //   // all of other options may go here
-        // });
+      } catch (error) {
+        const { errors } = error.response?.data;
+        Object.keys(errors).forEach((key) => {
+          console.log();
+          this.$notif.error(`${key}: ${errors[key][0]} !!`);
+        });
       } finally {
         this.loading = false;
       }

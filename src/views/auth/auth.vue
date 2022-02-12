@@ -14,6 +14,18 @@ export default {
 @import "@/assets/styles/abstract/mixins";
 .auth {
   @include flex($justify: center, $align: center);
+
+  &__navigate-link {
+    text-align: center;
+    margin-top: 20px;
+    cursor: pointer;
+    text-decoration: none;
+    color: var(--primary-main);
+    >span {
+      font-weight: bold;
+      color: var(--primary-darker);
+    }
+  }
   .auth-section {
     padding: 25px;
     background-color: white;
@@ -31,9 +43,9 @@ export default {
       margin-bottom: 30px;
     }
     &__form {
+      margin-bottom: 20px;
     }
 
-   
     &__action {
       margin-top: 25px;
     }
