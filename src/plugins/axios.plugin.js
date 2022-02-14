@@ -3,7 +3,6 @@ import nofit from "@/plugins/notification.plugin";
 axios.defaults.timeout = 30000;
 
 const request = (request) => {
-  console.log("before request send");
   return request;
 };
 
@@ -14,6 +13,8 @@ const requestError = (error) => {
 const response = (response) => {
   return response;
 };
+
+
 
 const responseError = (error) => {
   const { errors } = error.response?.data;

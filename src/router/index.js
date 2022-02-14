@@ -1,7 +1,8 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import authRoutes from "@/views/auth/auth.routes";
-import authMiddleware from '@/middlewares/auth.middleware'
+import authMiddleware from "@/middlewares/auth.middleware";
+import articleRoutes from "@/views/articles/articles.route";
 
 Vue.use(VueRouter);
 
@@ -16,16 +17,17 @@ const routes = [
     component: () => import("@/views/auth/auth.vue"),
     children: authRoutes,
     meta: {
-      isAuthRequired : false,
-    }
+      isAuthRequired: false,
+    },
   },
   {
     path: "/articles",
     name: "articles",
     component: () => import("@/views/articles/articles.vue"),
+    children: articleRoutes,
     meta: {
-      isAuthRequired : true,
-    }
+      isAuthRequired: true,
+    },
   },
 ];
 

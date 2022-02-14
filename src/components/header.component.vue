@@ -1,22 +1,31 @@
 <template>
   <header class="header">
-    Header 🚍
-    <navLink anchor="http://google.com">
-      <template v-slot:prefix>
-        <span>hi:</span>
-      </template>
-      search engine
-    </navLink>
-    <navLink anchor="http://facebook.com" />
+    <h1>Welcome</h1>
+    <h4>{{ username }}</h4>
+
+    <my-button
+      class="logout-btn"
+      text="Logout"
+      color="primary"
+      @clicked="logout()"
+    />
   </header>
 </template>
 
 <script>
-import navLink from "./navlink.vue";
 export default {
   name: "HeaderComponent",
-  components: {
-    navLink,
+  computed: {
+    username() {
+      return this.$cookie.get("username");
+    },
+  },
+  methods: {
+    logout() {
+      this.$cookie.remove("token");
+      this.$cookie.remove("username");
+      this.$router.push("/auth/login");
+    },
   },
 };
 </script>
@@ -27,12 +36,21 @@ export default {
   top: 0;
   height: 80px;
   padding: 0 20px;
-  background-color: #767575;
+  background-color: var(--primary-darker);
   display: flex;
   align-items: center;
   left: 0;
   right: 0;
   color: white;
   font-size: 20px;
+  display: flex;
+  align-items: center;
+  > h1 {
+    margin-right: 20px;
+  }
+
+  .logout-btn {
+    margin-left: auto;
+  }
 }
 </style>

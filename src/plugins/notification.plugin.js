@@ -24,4 +24,5 @@ const notif = {
 };
 
 Vue.prototype.$notif = notif;
+
 export default notif;
