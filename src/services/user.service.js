@@ -1,10 +1,11 @@
 import axios from "axios";
+import { BASE_URL } from "@/constants/general";
 
 const services = {
   register(data) {
     return axios({
       method: "POST",
-      baseURL: "https://api.realworld.io/api",
+      baseURL: BASE_URL,
       url: "/users",
       data: {
         user: data,
@@ -14,7 +15,7 @@ const services = {
   login(data) {
     return axios({
       method: "POST",
-      baseURL: "https://api.realworld.io/api",
+      baseURL: BASE_URL,
       url: "/users/login",
       data: {
         user: data,

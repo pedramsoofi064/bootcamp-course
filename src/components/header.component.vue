@@ -3,6 +3,8 @@
     <h1>Welcome</h1>
     <h4>{{ username }}</h4>
 
+    <h4>{{ name }}</h4>
+
     <my-button
       class="logout-btn"
       text="Logout"
@@ -13,9 +15,11 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   name: "HeaderComponent",
   computed: {
+    ...mapState(["name"]),
     username() {
       return this.$cookie.get("username");
     },
@@ -45,7 +49,8 @@ export default {
   font-size: 20px;
   display: flex;
   align-items: center;
-  > h1 {
+  > h1,
+  h4 {
     margin-right: 20px;
   }
 
