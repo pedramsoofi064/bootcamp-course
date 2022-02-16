@@ -12,6 +12,11 @@ const articleModule = {
       const res = await articleServices.getArticles();
       commit("getArticles", res.data);
     },
+    async createArticle({commit} , data){
+      commit
+      const res = await articleServices.createArticle(data)
+      console.log(res);
+    }
   },
   mutations: {
     getArticles(state, payload) {

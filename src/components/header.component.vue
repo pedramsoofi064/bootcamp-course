@@ -3,8 +3,6 @@
     <h1>Welcome</h1>
     <h4>{{ username }}</h4>
 
-    <h4>{{ name }}</h4>
-
     <my-button
       class="logout-btn"
       text="Logout"

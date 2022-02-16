@@ -10,12 +10,15 @@
     <div class="article__title">
       {{ data.title }}
     </div>
+    <div class="article__description">
+      {{ data.description }}
+    </div>
     <div class="article__body">
       {{ data.body }}
     </div>
     <div class="article__tags">
       <span v-for="(tag, index) in data.tagList" :key="index">
-        {{tag}}
+        {{ tag }}
       </span>
     </div>
   </div>
@@ -88,6 +91,12 @@ export default {
     font-weight: bold;
   }
 
+  &__description {
+    font-size: 14px;
+    margin-top: 10px;
+    color: var(--grey-6);
+    font-style: italic;
+  }
   &__body {
     font-size: 14px;
     margin-top: 10px;
@@ -101,7 +110,7 @@ export default {
     display: flex;
     flex-wrap: wrap;
     padding-top: 10px;
-    >span {
+    > span {
       padding: 5px 10px;
       font-size: 10px;
       color: var();

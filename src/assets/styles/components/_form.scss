@@ -14,5 +14,14 @@
             border-radius: 8px;
             padding: 0 10px;
         }
+        textarea {
+            height: 80px;
+            border: 1px solid var(--primary-main);
+            border-radius: 8px;
+            padding: 10px;
+            outline: none;
+            resize: none;
+
+        }
     }
 }

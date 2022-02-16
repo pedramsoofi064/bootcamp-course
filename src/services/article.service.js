@@ -8,7 +8,15 @@ const services = {
             method: 'GET',
             baseURL: BASE_URL,
             url: '/articles'
-
+            
+        })
+    },
+    createArticle(data) {
+        return axios({
+            method: "POST",
+            baseURL: BASE_URL,
+            url: '/articles',
+            data,
         })
     }
 }
