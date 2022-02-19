@@ -27,6 +27,7 @@ export default {
       this.$cookie.remove("token");
       this.$cookie.remove("username");
       this.$router.push("/auth/login");
+      this.$store.dispatch('articleModule/resetState')
     },
   },
 };

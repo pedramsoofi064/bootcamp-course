@@ -21,10 +21,26 @@
         {{ tag }}
       </span>
     </div>
+    <div class="article__action">
+      <my-button text="visit" color="primary" @clicked="visitArticle()" />
+      <my-button
+        v-if="data.author.username == username"
+        text="edit"
+        color="warning"
+        @clicked="editArtcile()"
+      />
+      <my-button
+        v-if="data.author.username == username"
+        text="delete"
+        color="danger"
+        @clicked="deleteArticle()"
+      />
+    </div>
   </div>
 </template>
 
 <script>
+import cookie from "@/plugins/jsCookie.plugin";
 export default {
   name: "articleComponent",
   props: {
@@ -45,11 +61,34 @@ export default {
       };
       return new Intl.DateTimeFormat("en-US", options).format(d);
     },
+    username() {
+      return cookie.get("username");
+    },
+  },
+  methods: {
+    visitArticle() {
+      this.$store.dispatch("articleModule/saveArticle", this.data);
+      this.$router.push(`/articles/${this.data.slug}`);
+    },
+    editArtcile() {
+      this.$store.dispatch("articleModule/saveArticle", this.data);
+      this.$router.push(`/articles/edit/${this.data.slug}`);
+    },
+    async deleteArticle() {
+      try {
+        await this.$store.dispatch(
+          "articleModule/deleteArticle",
+          this.data.slug
+        );
+      } catch {
+        this.$notif.error("error in delete artice");
+      }
+    },
   },
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .article {
   padding: 15px;
   background-color: white;
@@ -59,6 +98,7 @@ export default {
   box-shadow: 0px 0px 5px -2px rgba(0, 0, 0, 0.37);
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
   &__date {
     margin-left: auto;
     font-size: 12px;
@@ -105,8 +145,8 @@ export default {
   }
 
   &__tags {
-    margin-top: 15px;
-    border-top: 1px solid var(--grey-5);
+    margin-top: 5px;
+    margin-bottom: 15px;
     display: flex;
     flex-wrap: wrap;
     padding-top: 10px;
@@ -117,6 +157,16 @@ export default {
       margin-right: 5px;
       border-radius: 15px;
       background-color: rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  &__action {
+    border-top: 1px solid var(--grey-5);
+    padding: 5px 0;
+    display: flex;
+    button {
+      height: 20px !important;
+      margin-right: 10px;
     }
   }
 }

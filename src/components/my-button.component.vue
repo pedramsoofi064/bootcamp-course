@@ -63,5 +63,15 @@ export default {
       color: var(--cover-red-dark);
     }
   }
+  &.warning {
+    background-color: var(--cover-yellow-dark);
+    color: white;
+    border-color: var(--cover-yellow-dark);
+
+    &:hover {
+      background-color: white;
+      color: var(--cover-yellow-dark);
+    }
+  }
 }
 </style>

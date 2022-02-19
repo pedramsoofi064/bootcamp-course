@@ -91,6 +91,8 @@ export default {
         await this.$store.dispatch("articleModule/createArticle", {
           article: this.article,
         });
+        this.$notif.success('article created successfully')
+        this.$router.push('/articles/list')
       } catch {
         this.$notif.error("error in submit article");
       }
