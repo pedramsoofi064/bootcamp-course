@@ -14,6 +14,11 @@ const routes = [
     component: () => import("./addArticle/addArticle.vue"),
   },
   {
+    path: "edit/:slug",
+    name: "edit-article",
+    component: () => import("./addArticle/addArticle.vue"),
+  },
+  {
     path: ":slug",
     name: "articleSlug",
     component: () => import("./slug/slug.vue"),

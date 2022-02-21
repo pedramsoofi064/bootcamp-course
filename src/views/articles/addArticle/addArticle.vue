@@ -56,12 +56,15 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
   name: "AddArticle",
   data() {
     return {
       tag: "",
       loading: false,
+      mode: "",
       article: {
         title: "",
         description: "",
@@ -71,18 +74,47 @@ export default {
     };
   },
   computed: {
+    ...mapState({
+      selectedArticle: (state) => state.articleModule.selectedArticle,
+    }),
     pageTitle() {
-      return "Add Article";
+      return this.mode == "add" ? "Add Article" : "Edit Article";
     },
     submitText() {
-      return "create article";
+      return this.mode == "add" ? "create article" : "edit article";
     },
   },
+  async mounted() {
+    if (this.$route.name == "edit-article") this.mode = "edit";
+    else this.mode = "add";
+
+    if (this.mode == "edit") {
+      if (!this.selectedArticle) this.getArticle();
+      else this.handleEditMode();
+    }
+  },
   methods: {
+    handleEditMode() {
+      this.article = {
+        ...this.selectedArticle,
+      };
+    },
     addTag() {
       if (this.tag) {
         this.article.tagList.push(this.tag);
         this.tag = "";
+      }
+    },
+    async getArticle() {
+      const { slug } = this.$route.params;
+      this.loading = true;
+      try {
+        await this.$store.dispatch("articleModule/getArticle", slug);
+        this.handleEditMode();
+      } catch {
+        console.log("error in get article");
+      } finally {
+        this.loading = false;
       }
     },
     async submit() {
@@ -91,8 +123,8 @@ export default {
         await this.$store.dispatch("articleModule/createArticle", {
           article: this.article,
         });
-        this.$notif.success('article created successfully')
-        this.$router.push('/articles/list')
+        this.$notif.success("article created successfully");
+        this.$router.push("/articles/list");
       } catch {
         this.$notif.error("error in submit article");
       }
