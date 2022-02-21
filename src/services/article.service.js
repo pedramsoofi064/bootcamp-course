@@ -31,6 +31,14 @@ const services = {
       url: `/articles/${slug}`,
     });
   },
+  editArticle(data) {
+    return axios({
+      method: "PUT",
+      baseURL: BASE_URL,
+      url: `/articles/${data.slug}`,
+      data: data.data
+    });
+  },
 };
 
 export default services;

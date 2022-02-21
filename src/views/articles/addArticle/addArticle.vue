@@ -49,7 +49,7 @@
         class="submit-btn"
         :text="submitText"
         :loading="loading"
-        @clicked="submit()"
+        @clicked="handleSubmitMode()"
       />
     </form>
   </section>
@@ -96,7 +96,10 @@ export default {
   methods: {
     handleEditMode() {
       this.article = {
-        ...this.selectedArticle,
+        title: this.selectedArticle.title,
+        description: this.selectedArticle.description,
+        body: this.selectedArticle.body,
+        tagList: this.selectedArticle.tagList,
       };
     },
     addTag() {
@@ -117,8 +120,14 @@ export default {
         this.loading = false;
       }
     },
-    async submit() {
+    handleSubmitMode() {
+      if (this.mode == "add") this.submitAdd();
+      else this.submitEdit();
+    },
+
+    async submitAdd() {
       this.loading = true;
+
       try {
         await this.$store.dispatch("articleModule/createArticle", {
           article: this.article,
@@ -127,6 +136,22 @@ export default {
         this.$router.push("/articles/list");
       } catch {
         this.$notif.error("error in submit article");
+      }
+    },
+    async submitEdit() {
+      this.loading = true;
+
+      try {
+        await this.$store.dispatch("articleModule/editArticle", {
+          slug: this.selectedArticle.slug,
+          data: {
+            article: this.article,
+          },
+        });
+        this.$notif.success("article edited successfully");
+        this.$router.push("/articles/list");
+      } catch {
+        this.$notif.error("error in edit article");
       }
     },
   },

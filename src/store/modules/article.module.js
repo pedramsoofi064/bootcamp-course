@@ -33,6 +33,14 @@ const articleModule = {
     resetState({ commit }) {
       commit("resetState");
     },
+    async editArticle({ commit }, data) {
+      const res = await articleServices.editArticle(data);
+      const { article } = res.data;
+      commit("editArticle", {
+        prevSlug: data.slug,
+        data: article,
+      });
+    },
   },
   mutations: {
     getArticles(state, payload) {
@@ -49,9 +57,15 @@ const articleModule = {
       state.articles = state.articles.filter((item) => item.slug != slug);
     },
     resetState(state) {
-      state.articles = []
-      state.articlesCount = 0
+      state.articles = [];
+      state.articlesCount = 0;
       state.selectedArticle = null;
+    },
+    editArticle(state, payload) {
+      state.articles = state.articles.filter(
+        (item) => item.slug != payload.prevSlug
+      );
+      state.articles.unshift(payload.data);
     },
   },
 };
